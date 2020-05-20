@@ -1,15 +1,18 @@
 'use strict';
-const len = process.argv[2] || 40;
+const memo = new Map();
+memo.set(0,0);
+memo.set(1,1);
+
 function fib(n){
-    if (n === 0){
-        return 0;
+    if(memo.has(n)){
+        return memo.get(n);
     }
-    else if (n === 1){
-        return 1;
-    }
-    return fib(n -1) + fib(n - 2);
+    const value = fib(n-1) + fib(n - 2);
+    memo.set(n, value);
+    return value;
 }
 
+const len = 40;
 for (let i = 0; i <= len; i++){
     console.log(fib(i));
 }
